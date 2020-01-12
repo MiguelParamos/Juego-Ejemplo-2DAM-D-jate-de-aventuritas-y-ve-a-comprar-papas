@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contenedorGlobal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="es.cenecmalaga.lanzamiento.MainActivity">
+
+    <ImageView
+        android:id="@+id/imagenFondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondoact1" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/elementos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contenedorOpciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparentWhite"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloApp">
+
+            <LinearLayout
+                android:id="@+id/contenedorGenero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textoGenero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:height="27dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/genero"
+                    android:textColor="@color/secundario"
+
+                    android:textSize="15sp" />
+
+                <Switch
+                    android:id="@+id/switchGenero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cambiarGenero"
+                    android:height="27dp"
+                    android:text="@string/masculino"
+                    android:textColor="@color/terciario" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contenedorMovimiento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textoModoMovimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:height="27dp"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/modoMovimiento"
+                    android:textColor="@color/secundario" />
+
+                <Switch
+                    android:id="@+id/switchModoMovimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:height="27dp"
+                    android:onClick="cambiarModoMovimiento"
+                    android:text="@string/discreto"
+                    android:textColor="@color/terciario" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/botonJugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cuaternario_claro"
+                android:text="@string/jugar"
+                android:onClick="lanzarJuego"
+                android:textColor="@color/cuaternario_oscuro"
+                android:textColorHighlight="@color/cuaternario_claro"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tituloApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/veryTransparentWhite"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="10sp"
+            android:shadowColor="@color/primario_claro"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="4"
+            android:text="@string/app_name"
+            android:textColor="@color/primario"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/secundario_oscuro"
+            android:onClick="irAOpciones"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_manage" />
+
+        <TextView
+            android:id="@+id/gameVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primario"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloApp" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</FrameLayout>

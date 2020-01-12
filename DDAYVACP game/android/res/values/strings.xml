@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Déjate de aventuritas y ve a comprar papas</string>
+    <string name="jugar">Jugar</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="opciones">Opciones</string>
+    <string name="discreto">Discreto</string>
+    <string name="continuo">Continuo</string>
+    <string name="genero">Género del personaje:</string>
+    <string name="modoMovimiento">Modo de movimiento:</string>
+    <string name="generoPreferencias">Género masculino/femenino:</string>
+    <string name="modoMovimientoPreferencias">Movimiento discreto/continuo:</string>
+    <string name="valoresOpcionesDefecto">Valores de opciones por defecto:</string>
+
+</resources>

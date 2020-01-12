@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_background_color">#FFFFFFFF</color>
+    <color name="transparentWhite">#AAFFFFFF</color>
+    <color name="veryTransparentWhite">#66FFFFFF</color>
+    <color name="primario_oscuro">#91140a</color>
+    <color name="primario">#d54f43</color>
+    <color name="primario_claro">#FFA39C</color>
+    <color name="secundario_oscuro">#176570</color>
+    <color name="secundario">#2b7882</color>
+    <color name="secundario_claro">#72B0B9</color>
+    <color name="terciario_oscuro">#914B0A</color>
+    <color name="terciario">#d58943</color>
+    <color name="terciario_claro">#F4AE6D</color>
+    <color name="cuaternario_oscuro">#086F1A</color>
+    <color name="cuaternario">#33A347</color>
+    <color name="cuaternario_claro">#82D490</color>
+</resources>
