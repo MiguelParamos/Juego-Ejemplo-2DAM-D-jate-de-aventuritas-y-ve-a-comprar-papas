@@ -41,17 +41,36 @@ public class Jugador {
         alturaMapaTiles = ((TiledMapTileLayer) mapa.getLayers().get(0)).getHeight(); //Obtenemos desde el mapa el número de tiles de alto de la 1º Capa
         anchuraMapaPixels=anchuraMapaTiles*(int)mapa.getProperties().get("width");
         alturaMapaPixels=alturaMapaTiles*(int)mapa.getProperties().get("height");
+        Gdx.app.log("PosCamaraJugador",camara.position.x+" : "+camara.position.y);
         this.posicionTiles=new Vector3(camara.position.x,camara.position.y,0);
-        posicionPixels=camara.unproject(posicionTiles); //La posición en pixels viene de "desproyectar" o proyectar a la inversa la cámara sobre el mapa, en la posición en la que está el jugador
+        Gdx.app.log("PosTilesJugador",posicionTiles.x+" : "+posicionTiles.y);
+        Gdx.app.log("PosPixelsJugador",posicionPixels.x+" : "+posicionPixels.y);
         if(genero){
             sprite=new Sprite(new Texture("personajes/playerFemale.png"));
         }else{
             sprite=new Sprite(new Texture("personajes/playerMale.png"));
         }
 
-        //Establecemos la posición inicial del Sprite
-        sprite.setPosition(posicionPixels.x,posicionPixels.y);
+        this.ponerEnTile();
 
+    }
+
+    /**
+     * Calcula a que pixel de la pantalla corresponde el tile que decimos
+     */
+    private void ponerEnTile(){
+        posicionPixels=camara.project(new Vector3(posicionTiles));
+        sprite.setPosition(posicionPixels.x,posicionPixels.y);
+    }
+
+    /**
+     * Cambia la posición del personaje expresada en la coordenada del tile a donde va
+     * @param x coordenada horizontal del tile donde se pone el jugador
+     * @param y coordenada vertical del tile donde se pone el jugador
+     */
+    public void cambiarTile(int x,int y){
+        posicionTiles=new Vector3(x,y,0);
+        ponerEnTile();
     }
 
     /**
