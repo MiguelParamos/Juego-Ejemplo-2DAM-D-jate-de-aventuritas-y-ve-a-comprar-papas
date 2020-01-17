@@ -57,6 +57,8 @@ public class EscuchadorTeclado implements InputProcessor {
                 camera.zoom = Math.min(camera.zoom + 0.2f, 2); //Se hace zoom entre 0.1 y 2
                 break;
         }
+
+        keepCameraInBounds();
         camera.update();
         return true;
     }
@@ -97,4 +99,22 @@ public class EscuchadorTeclado implements InputProcessor {
     public boolean scrolled(int amount) {
         return false;
     }
+
+    private void keepCameraInBounds(){
+        if(camera.position.x-(camera.viewportWidth/2)
+                *camera.zoom<0){camera.position.x=
+                (camera.viewportWidth/2)*camera.zoom;}
+        if(camera.position.y-(camera.viewportHeight/2)
+                *camera.zoom<0){camera.position.y=(
+                        camera.viewportHeight/2)*camera.zoom;}
+        if(camera.position.x+(camera.viewportWidth/2)*
+                camera.zoom>(int)map.getProperties().get("width")){
+            camera.position.x=(int)map.getProperties().get("width")-
+                    (camera.viewportWidth/2)
+                    *camera.zoom;}if(camera.position.y+
+                (camera.viewportHeight/2)*camera.zoom>(int)map.getProperties().get("height"))
+                    {camera.position.y=(int)map.getProperties().get("height")-
+                            (camera.viewportHeight/2)*camera.zoom;}
+    }
+
 }
