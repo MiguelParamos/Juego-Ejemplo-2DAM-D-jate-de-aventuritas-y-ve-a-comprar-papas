@@ -5,16 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
 
-import es.cenecmalaga.entrada.EscuchadorTeclado;
+import es.cenecmalaga.entrada.EscuchadorTecladoCamara;
+import es.cenecmalaga.entrada.EscuchadorTecladoJugador;
 import es.cenecmalaga.personajes.Jugador;
 
 /**
@@ -27,7 +24,16 @@ public class MiJuego extends ApplicationAdapter {
 	private static int WIDTH; //Aquí almacenaremos la anchura en tiles
 	private static int HEIGHT; //Aquí almacenaremos la altura en tiles
 	public static final float unitScale = 1/16f; //Nos servirá para establecer que la pantalla se divide en tiles de 16 pixeles;
-	public Jugador jugador;
+	private Jugador jugador;
+	private boolean generoJugador;
+
+	/**
+	 * Constructor de MiJuego, recibe el género del personaje
+	 * @param genero false-> Masculino , true -> Femenino
+	 */
+	public MiJuego(boolean genero){
+		generoJugador=genero;
+	}
 
 	/**
 	 * Sirve para inicializar variables, como el mundo, personajes, teclado, sprites...
@@ -56,11 +62,12 @@ public class MiJuego extends ApplicationAdapter {
 		camera.update(); //Colocamos la Cámara.
 
 		//Inicializar Sprites
-		jugador=new Jugador(false,camera,map);
+		jugador=new Jugador(generoJugador,camera,map);
 
 		//ESCUCHADORES
 		InputMultiplexer multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(new EscuchadorTeclado(camera,map));
+		multiplexer.addProcessor(new EscuchadorTecladoCamara(camera,map));
+		multiplexer.addProcessor(new EscuchadorTecladoJugador(jugador));
 		Gdx.input.setInputProcessor(multiplexer);
 
 	}

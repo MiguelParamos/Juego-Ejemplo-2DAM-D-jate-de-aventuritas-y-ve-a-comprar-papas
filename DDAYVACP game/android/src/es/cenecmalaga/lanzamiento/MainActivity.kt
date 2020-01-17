@@ -71,6 +71,11 @@ class MainActivity : AppCompatActivity() {
         val i = Intent(
                 this,
                 AndroidLauncher::class.java)
+        var bundle:Bundle=Bundle();
+        //Si es masculino no va a estar "checked" el switch genero
+        //Si es femenino, si va a estarlo.
+        bundle.putBoolean("genero",genero.isChecked)
+        i.putExtras(bundle)
         this.startActivity(i)
     }
 

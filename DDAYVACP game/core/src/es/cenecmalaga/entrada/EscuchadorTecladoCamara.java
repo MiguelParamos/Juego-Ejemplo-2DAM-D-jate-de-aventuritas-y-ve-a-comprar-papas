@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector3;
 
-public class EscuchadorTeclado implements InputProcessor {
+public class EscuchadorTecladoCamara implements InputProcessor {
     private OrthographicCamera camera; //Aquí capturaremos la cámara de la clase del juego
     private TiledMap map;
     private char movimientoAutomatico;
 
-    public EscuchadorTeclado(OrthographicCamera oc,TiledMap tm){
+    public EscuchadorTecladoCamara(OrthographicCamera oc, TiledMap tm){
         super();
         this.camera=oc;
         this.map=tm;

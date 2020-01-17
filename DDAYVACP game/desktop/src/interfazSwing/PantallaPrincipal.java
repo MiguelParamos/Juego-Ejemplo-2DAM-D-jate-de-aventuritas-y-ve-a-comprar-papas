@@ -34,7 +34,7 @@ import es.cenecmalaga.ddayvacp.MiJuego;
 
 public class PantallaPrincipal extends JPanel {
     private Ventana ventana;
-    private JToggleButton tglbtnGneroMasculino;
+    private JToggleButton tglbtnGenero;
     private JToggleButton tglbtnModoDeMovimiento;
 
     public PantallaPrincipal(Ventana v){
@@ -59,7 +59,11 @@ public class PantallaPrincipal extends JPanel {
                 config.height=500;
                 config.resizable=false;
                 ventana.setVisible(false);
-                new LwjglApplication(new MiJuego(), config);
+                //Si es masculino no va a estar "selected" el toggle tglbtnGenero
+                //Si es femenino, si va a estarlo.
+                new LwjglApplication(new MiJuego(
+                        tglbtnGenero.isSelected()
+                ), config);
             }
         });
     	add(btnJugar);
@@ -72,7 +76,7 @@ public class PantallaPrincipal extends JPanel {
                 try {
                     BufferedWriter bw=new BufferedWriter(new FileWriter("./opciones.ddayvacp"));
 
-                    if(tglbtnGneroMasculino.isSelected()){
+                    if(tglbtnGenero.isSelected()){
                         bw.write("femenino");
                     }else{
                         bw.write("masculino");
@@ -93,20 +97,20 @@ public class PantallaPrincipal extends JPanel {
             }
         });
     	add(botonOpciones);
-    	
-    	tglbtnGneroMasculino = new JToggleButton("G\u00E9nero Masculino");
-    	tglbtnGneroMasculino.setBounds(100, 241, 300, 23);
-        tglbtnGneroMasculino.addActionListener(new ActionListener() {
+
+        tglbtnGenero = new JToggleButton("G\u00E9nero Masculino");
+        tglbtnGenero.setBounds(100, 241, 300, 23);
+        tglbtnGenero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(tglbtnGneroMasculino.isSelected()){
-                    tglbtnGneroMasculino.setText("G\u00E9nero Femenino");
+                if(tglbtnGenero.isSelected()){
+                    tglbtnGenero.setText("G\u00E9nero Femenino");
                 }else{
-                    tglbtnGneroMasculino.setText("G\u00E9nero Masculino");
+                    tglbtnGenero.setText("G\u00E9nero Masculino");
                 }
             }
         });
-    	add(tglbtnGneroMasculino);
+    	add(tglbtnGenero);
     	
     	tglbtnModoDeMovimiento = new JToggleButton("Modo de movimiento Discreto");
     	tglbtnModoDeMovimiento.setBounds(100, 276, 300, 23);
@@ -129,7 +133,7 @@ public class PantallaPrincipal extends JPanel {
             try {
                 BufferedReader br=new BufferedReader(new FileReader(opciones));
                 if(br.readLine().equals("femenino")){
-                    tglbtnGneroMasculino.doClick();
+                    tglbtnGenero.doClick();
                 }
                 if(br.readLine().equals("continuo")){
                     tglbtnModoDeMovimiento.doClick();

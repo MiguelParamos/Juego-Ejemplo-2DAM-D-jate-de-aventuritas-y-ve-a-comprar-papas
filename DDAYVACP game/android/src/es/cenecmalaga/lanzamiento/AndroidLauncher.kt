@@ -11,7 +11,8 @@ class AndroidLauncher : AndroidApplication() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
-        initialize(MiJuego(), config)
+        initialize(MiJuego(this.intent.extras!!.
+                getBoolean("genero")), config)
     }
 
 }

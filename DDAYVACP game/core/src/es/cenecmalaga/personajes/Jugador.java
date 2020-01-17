@@ -41,10 +41,25 @@ public class Jugador {
         alturaMapaTiles = ((TiledMapTileLayer) mapa.getLayers().get(0)).getHeight(); //Obtenemos desde el mapa el número de tiles de alto de la 1º Capa
         anchuraMapaPixels=anchuraMapaTiles*(int)mapa.getProperties().get("width");
         alturaMapaPixels=alturaMapaTiles*(int)mapa.getProperties().get("height");
-        Gdx.app.log("PosCamaraJugador",camara.position.x+" : "+camara.position.y);
         this.posicionTiles=new Vector3(camara.position.x,camara.position.y,0);
-        Gdx.app.log("PosTilesJugador",posicionTiles.x+" : "+posicionTiles.y);
-        Gdx.app.log("PosPixelsJugador",posicionPixels.x+" : "+posicionPixels.y);
+        if(genero){
+            sprite=new Sprite(new Texture("personajes/playerFemale.png"));
+        }else{
+            sprite=new Sprite(new Texture("personajes/playerMale.png"));
+        }
+
+        this.ponerEnTile();
+
+    }
+
+    public Jugador(boolean genero, OrthographicCamera cam, TiledMap mapa,int posX,int posY){
+        batch=new SpriteBatch();
+        camara=cam;
+        anchuraMapaTiles = ((TiledMapTileLayer) mapa.getLayers().get(0)).getWidth(); //Obtenemos desde el mapa el número de tiles de ancho de la 1º Capa
+        alturaMapaTiles = ((TiledMapTileLayer) mapa.getLayers().get(0)).getHeight(); //Obtenemos desde el mapa el número de tiles de alto de la 1º Capa
+        anchuraMapaPixels=anchuraMapaTiles*(int)mapa.getProperties().get("width");
+        alturaMapaPixels=alturaMapaTiles*(int)mapa.getProperties().get("height");
+        this.posicionTiles=new Vector3(posX,posY,0);
         if(genero){
             sprite=new Sprite(new Texture("personajes/playerFemale.png"));
         }else{
@@ -71,6 +86,36 @@ public class Jugador {
     public void cambiarTile(int x,int y){
         posicionTiles=new Vector3(x,y,0);
         ponerEnTile();
+    }
+
+    /**
+     * Mueve el jugador un tile en la dirección establecida
+     * @param direccion 'u' -> arriba,'d' -> abajo,'l' -> izda, 'r' -> derecha
+     */
+    public void moverTile(char direccion){
+        switch (direccion){
+            case 'u':
+                if(posicionTiles.y<this.alturaMapaTiles) {
+                    posicionTiles.y++;
+                }
+                break;
+            case 'd':
+                if(posicionTiles.y>0) {
+                    posicionTiles.y--;
+                }
+                break;
+            case 'l':
+                if(posicionTiles.x>0) {
+                    posicionTiles.x--;
+                }
+                break;
+            case 'r':
+                if(posicionTiles.x<this.anchuraMapaTiles) {
+                    posicionTiles.x++;
+                }
+                break;
+        }
+        this.cambiarTile((int)posicionTiles.x,(int)posicionTiles.y);
     }
 
     /**
