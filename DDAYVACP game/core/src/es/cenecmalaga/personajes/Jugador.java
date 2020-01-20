@@ -92,11 +92,12 @@ public class Jugador {
     /**
      * Mueve el jugador un tile en la dirección establecida
      * @param direccion 'u' -> arriba,'d' -> abajo,'l' -> izda, 'r' -> derecha
+     * @param moverDelCentro indica si el jugador se puede mover del centro de la pantalla (true) o tiene que permanecer atado al centro porque la cámara lo va a seguir(false)
      */
-    public void moverTile(char direccion){
+    public void moverJugadorTile(char direccion,boolean moverDelCentro){
         switch (direccion){
             case 'u':
-                if(posicionTiles.y<this.alturaMapaTiles) {
+                if(posicionTiles.y<this.alturaMapaTiles-1) {
                     posicionTiles.y++;
                 }
                 break;
@@ -111,42 +112,51 @@ public class Jugador {
                 }
                 break;
             case 'r':
-                if(posicionTiles.x<this.anchuraMapaTiles) {
+                if(posicionTiles.x<this.anchuraMapaTiles-1) {
                     posicionTiles.x++;
                 }
                 break;
         }
         this.cambiarTile((int)posicionTiles.x,(int)posicionTiles.y);
+        if(moverDelCentro){
+            ponerEnTile();
+        }
     }
 
 
     /**
      * Mueve la cámara un tile en la dirección establecida
      * @param direccion 'u' -> arriba,'d' -> abajo,'l' -> izda, 'r' -> derecha
+     * @return devuelve true si la cámara se ha movido, false en caso contrario
      */
-    public void moverCamaraTile(char direccion) {
+    public boolean moverCamaraTile(char direccion) {
         switch (direccion) {
             case 'u':
                 if (camara.position.y < this.alturaMapaTiles) {
                     camara.position.y++;
+                    return true;
                 }
                 break;
             case 'd':
                 if (camara.position.y > 0) {
                     camara.position.y--;
+                    return true;
                 }
                 break;
             case 'l':
                 if (camara.position.x > 0) {
                     camara.position.x--;
+                    return true;
                 }
                 break;
             case 'r':
                 if (camara.position.x < this.anchuraMapaTiles) {
                     camara.position.x++;
+                    return true;
                 }
                 break;
         }
+        return false;
     }
 
     /**

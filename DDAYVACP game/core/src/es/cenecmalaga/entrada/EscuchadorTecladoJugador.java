@@ -1,8 +1,6 @@
 package es.cenecmalaga.entrada;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import es.cenecmalaga.personajes.Jugador;
 
@@ -22,20 +20,23 @@ public class EscuchadorTecladoJugador extends EscuchadorTeclado {
     public boolean keyDown(int keycode) {
         switch (keycode){
             case Input.Keys.W:
-                jugador.moverTile('u');
                 jugador.moverCamaraTile('u');
+                jugador.moverJugadorTile('u',keepCameraInBounds());
                 break;
             case Input.Keys.S:
-                jugador.moverTile('d');
                 jugador.moverCamaraTile('d');
+                jugador.moverJugadorTile('d',keepCameraInBounds());
+
                  break;
             case Input.Keys.A:
-                jugador.moverTile('l');
                 jugador.moverCamaraTile('l');
+                jugador.moverJugadorTile('l',keepCameraInBounds());
+
                 break;
             case Input.Keys.D:
-                jugador.moverTile('r');
                 jugador.moverCamaraTile('r');
+                jugador.moverJugadorTile('r',keepCameraInBounds());
+
                 break;
         }
         return false;

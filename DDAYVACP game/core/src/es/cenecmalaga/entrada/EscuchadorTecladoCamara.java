@@ -8,10 +8,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector3;
 
 public class EscuchadorTecladoCamara extends EscuchadorTeclado {
-    private char movimientoAutomatico;
+    private char movimientoAutomatico; //vale '-' si no hay movimiento automático. 'd' si se está moviendo automáticamente abajo, 'u' automáticamente arriba, 'l' automáticamente a la izda, 'r' automáticamente a dcha.
 
     public EscuchadorTecladoCamara(OrthographicCamera oc, TiledMap tm){
         super(oc,tm);
+        movimientoAutomatico='-';
     }
 
 
@@ -26,37 +27,41 @@ public class EscuchadorTecladoCamara extends EscuchadorTeclado {
             case Keys.LEFT:
                 camera.position.x = Math.max(camera.position.x - 1, 0); //Se mueve la cámara hasta el mínimo del mapa
                 keepCameraInBounds();
+                movimientoAutomatico='-';
             break;
             case Keys.RIGHT:
                 camera.position.x = Math.min(camera.position.x + 1,
                         (int)map.getProperties().get("width"));
                 //Se mueve la cámara hasta el máximo del mapa
                 keepCameraInBounds();
+                movimientoAutomatico='-';
                 break;
             case Keys.UP:
                 camera.position.y = Math.min(camera.position.y + 1,
                         (int)map.getProperties().get("height"));
                 //Se mueve la cámara hasta el máximo del mapa
                 keepCameraInBounds();
+                movimientoAutomatico='-';
                 break;
             case Keys.DOWN:
                 camera.position.y = Math.max(camera.position.y - 1,0);
                 //Se mueve la cámara hasta el máximo del mapa
                 keepCameraInBounds();
+                movimientoAutomatico='-';
                 break;
             case Keys.CONTROL_RIGHT:
-                //Establecemos patrón de movimiento: Primero siempre
-                //me voy a y=0, y desde ahí voy hacia x=(anchura del mapa) y empiezo a moverme
-                //en cuadrados en todo el borde del mapa.
-
+                movimientoAutomatico='d';
+                realizarMovimientoAutomático();
                 break;
             case Keys.PLUS:
                 camera.zoom = Math.max(camera.zoom - 0.2f, 0.1f); //Se hace zoom entre 0.1 y 2
                 keepCameraInBounds();
+                movimientoAutomatico='-';
                 break;
             case Keys.MINUS:
-                camera.zoom = Math.min(camera.zoom + 0.2f, 2); //Se hace zoom entre 0.1 y 2
+                camera.zoom = Math.min(camera.zoom + 0.2f, 1); //Se hace zoom entre 0.1 y 2
                 keepCameraInBounds();
+                movimientoAutomatico='-';
                 break;
         }
 
@@ -102,6 +107,21 @@ public class EscuchadorTecladoCamara extends EscuchadorTeclado {
         return false;
     }
 
+    public char getMovimientoAutomatico(){
+        return movimientoAutomatico;
+    }
 
+    //ESTA FUNCIÓN SE DEBE LLAMAR EN RENDER
+    //Siempre empiezo moviendo hacia abajo
+    //Establecemos patrón de movimiento: Primero siempre
+    //me voy a y=0, y desde ahí voy hacia x=(anchura del mapa) y empiezo a moverme
+    //en cuadrados en la totalidad del borde del mapa. Perpetuamente hasta que pulse otra tecla
+
+    public void realizarMovimientoAutomático(){
+        //Esto solo funciona si no hemos anulado el movimiento automático
+        if(this.movimientoAutomatico!='-'){
+
+        }
+    }
 
 }
