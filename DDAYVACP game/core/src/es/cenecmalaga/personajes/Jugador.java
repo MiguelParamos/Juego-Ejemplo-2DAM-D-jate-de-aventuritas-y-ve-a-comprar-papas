@@ -123,6 +123,32 @@ public class Jugador {
         }
     }
 
+    public void moverJugadorPixels(char direccion){
+        switch (direccion){
+            case 'u':
+                if(posicionPixels.y<this.alturaMapaPixels) {
+                    posicionPixels.y+=5;
+                }
+                break;
+            case 'd':
+                if(posicionPixels.y>0) {
+                    posicionPixels.y-=5;
+                }
+                break;
+            case 'l':
+                if(posicionPixels.x>0) {
+                    posicionPixels.x-=5;
+                }
+                break;
+            case 'r':
+                if(posicionPixels.x<this.anchuraMapaPixels-1) {
+                    posicionPixels.x+=5;
+                }
+                break;
+        }
+        sprite.setPosition(posicionPixels.x,posicionPixels.y);
+    }
+
 
     /**
      * Mueve la cámara un tile en la dirección establecida

@@ -1,5 +1,6 @@
 package es.cenecmalaga.entrada;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 import es.cenecmalaga.personajes.Jugador;
@@ -49,6 +50,21 @@ public class EscuchadorTecladoJugador extends EscuchadorTeclado {
 
     @Override
     public boolean keyTyped(char character) {
+        Gdx.app.log("typed",character+"");
+        switch (character){
+            case 'w':
+                jugador.moverJugadorPixels('u');
+                break;
+            case 's':
+                jugador.moverJugadorPixels('d');
+                break;
+            case 'a':
+                jugador.moverJugadorPixels('l');
+                break;
+            case 'd':
+                jugador.moverJugadorPixels('r');
+                break;
+        }
         return false;
     }
 
