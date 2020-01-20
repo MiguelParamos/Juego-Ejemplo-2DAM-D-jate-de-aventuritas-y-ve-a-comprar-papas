@@ -2,6 +2,7 @@ package es.cenecmalaga.entrada;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import es.cenecmalaga.personajes.Jugador;
 
@@ -9,10 +10,11 @@ import es.cenecmalaga.personajes.Jugador;
  * Clase que implementa el escuchador de teclado de un personaje
  * @author Miguel Páramos
  */
-public class EscuchadorTecladoJugador implements InputProcessor {
+public class EscuchadorTecladoJugador extends EscuchadorTeclado {
     private Jugador jugador; //El jugador que se va a mover con este escuchador
 
     public EscuchadorTecladoJugador(Jugador j){
+        super(j.getCamara(),j.getMapa());
         jugador=j;
     }
 
@@ -21,15 +23,19 @@ public class EscuchadorTecladoJugador implements InputProcessor {
         switch (keycode){
             case Input.Keys.W:
                 jugador.moverTile('u');
+                jugador.moverCamaraTile('u');
                 break;
             case Input.Keys.S:
                 jugador.moverTile('d');
+                jugador.moverCamaraTile('d');
                  break;
             case Input.Keys.A:
                 jugador.moverTile('l');
+                jugador.moverCamaraTile('l');
                 break;
             case Input.Keys.D:
                 jugador.moverTile('r');
+                jugador.moverCamaraTile('r');
                 break;
         }
         return false;

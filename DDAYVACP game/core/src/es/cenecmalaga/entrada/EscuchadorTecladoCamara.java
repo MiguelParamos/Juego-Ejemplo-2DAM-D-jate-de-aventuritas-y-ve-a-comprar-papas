@@ -7,15 +7,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector3;
 
-public class EscuchadorTecladoCamara implements InputProcessor {
-    private OrthographicCamera camera; //Aquí capturaremos la cámara de la clase del juego
-    private TiledMap map;
+public class EscuchadorTecladoCamara extends EscuchadorTeclado {
     private char movimientoAutomatico;
 
     public EscuchadorTecladoCamara(OrthographicCamera oc, TiledMap tm){
-        super();
-        this.camera=oc;
-        this.map=tm;
+        super(oc,tm);
     }
 
 
@@ -29,20 +25,24 @@ public class EscuchadorTecladoCamara implements InputProcessor {
         switch (keycode){
             case Keys.LEFT:
                 camera.position.x = Math.max(camera.position.x - 1, 0); //Se mueve la cámara hasta el mínimo del mapa
+                keepCameraInBounds();
             break;
             case Keys.RIGHT:
                 camera.position.x = Math.min(camera.position.x + 1,
                         (int)map.getProperties().get("width"));
                 //Se mueve la cámara hasta el máximo del mapa
+                keepCameraInBounds();
                 break;
             case Keys.UP:
                 camera.position.y = Math.min(camera.position.y + 1,
                         (int)map.getProperties().get("height"));
                 //Se mueve la cámara hasta el máximo del mapa
+                keepCameraInBounds();
                 break;
             case Keys.DOWN:
                 camera.position.y = Math.max(camera.position.y - 1,0);
                 //Se mueve la cámara hasta el máximo del mapa
+                keepCameraInBounds();
                 break;
             case Keys.CONTROL_RIGHT:
                 //Establecemos patrón de movimiento: Primero siempre
@@ -52,13 +52,15 @@ public class EscuchadorTecladoCamara implements InputProcessor {
                 break;
             case Keys.PLUS:
                 camera.zoom = Math.max(camera.zoom - 0.2f, 0.1f); //Se hace zoom entre 0.1 y 2
+                keepCameraInBounds();
                 break;
             case Keys.MINUS:
                 camera.zoom = Math.min(camera.zoom + 0.2f, 2); //Se hace zoom entre 0.1 y 2
+                keepCameraInBounds();
                 break;
         }
 
-        keepCameraInBounds();
+
         camera.update();
         return true;
     }
@@ -100,21 +102,6 @@ public class EscuchadorTecladoCamara implements InputProcessor {
         return false;
     }
 
-    private void keepCameraInBounds(){
-        if(camera.position.x-(camera.viewportWidth/2)
-                *camera.zoom<0){camera.position.x=
-                (camera.viewportWidth/2)*camera.zoom;}
-        if(camera.position.y-(camera.viewportHeight/2)
-                *camera.zoom<0){camera.position.y=(
-                        camera.viewportHeight/2)*camera.zoom;}
-        if(camera.position.x+(camera.viewportWidth/2)*
-                camera.zoom>(int)map.getProperties().get("width")){
-            camera.position.x=(int)map.getProperties().get("width")-
-                    (camera.viewportWidth/2)
-                    *camera.zoom;}if(camera.position.y+
-                (camera.viewportHeight/2)*camera.zoom>(int)map.getProperties().get("height"))
-                    {camera.position.y=(int)map.getProperties().get("height")-
-                            (camera.viewportHeight/2)*camera.zoom;}
-    }
+
 
 }

@@ -25,6 +25,7 @@ public class Jugador {
     private int anchuraMapaTiles; //Anchura del mapa donde nos movemos en  tiles
     private int alturaMapaTiles; //Anchura del mapa donde nos movemos en tiles
     private SpriteBatch batch; //Batch donde contengo y dibujo al personaje
+    private TiledMap mapa; //El mapa donde se juega
 
     /**
      * Constructor que permite crear un jugador a partir de su
@@ -47,7 +48,7 @@ public class Jugador {
         }else{
             sprite=new Sprite(new Texture("personajes/playerMale.png"));
         }
-
+        this.mapa=mapa;
         this.ponerEnTile();
 
     }
@@ -85,7 +86,7 @@ public class Jugador {
      */
     public void cambiarTile(int x,int y){
         posicionTiles=new Vector3(x,y,0);
-        ponerEnTile();
+       // ponerEnTile();
     }
 
     /**
@@ -118,6 +119,36 @@ public class Jugador {
         this.cambiarTile((int)posicionTiles.x,(int)posicionTiles.y);
     }
 
+
+    /**
+     * Mueve la cámara un tile en la dirección establecida
+     * @param direccion 'u' -> arriba,'d' -> abajo,'l' -> izda, 'r' -> derecha
+     */
+    public void moverCamaraTile(char direccion) {
+        switch (direccion) {
+            case 'u':
+                if (camara.position.y < this.alturaMapaTiles) {
+                    camara.position.y++;
+                }
+                break;
+            case 'd':
+                if (camara.position.y > 0) {
+                    camara.position.y--;
+                }
+                break;
+            case 'l':
+                if (camara.position.x > 0) {
+                    camara.position.x--;
+                }
+                break;
+            case 'r':
+                if (camara.position.x < this.anchuraMapaTiles) {
+                    camara.position.x++;
+                }
+                break;
+        }
+    }
+
     /**
      * Dibuja el jugador dentro de su batch interno
      */
@@ -141,6 +172,16 @@ public class Jugador {
                         /alturaMapaPixels)
                         *(1/camara.zoom));
     }
+
+    public OrthographicCamera getCamara(){
+        return this.camara;
+    }
+
+    public TiledMap getMapa(){
+        return this.mapa;
+    }
+
+
 
 
 
