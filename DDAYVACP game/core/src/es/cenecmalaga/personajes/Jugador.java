@@ -156,6 +156,36 @@ public class Jugador {
         sprite.setPosition(posicionPixels.x,posicionPixels.y);
     }
 
+    /**
+     * TODO terminar cuando hagamos los mundos continuos
+     * @param direccion
+     */
+    public void moverCamaraPixels(char direccion){
+        switch (direccion){
+            case 'u':
+                //Uso el deltaTime en movimiento en pixels para
+                //Que la velocidad de movimiento sea independiente de
+                //Los FPS. Es una regla de 3:
+                //Pixels        Segundo
+                //300  ---------    1
+                // x   --------- deltaTime
+                if(camara.position.y<this.alturaMapaTiles) {
+
+                }
+                break;
+            case 'd':
+
+                break;
+            case 'l':
+
+                break;
+            case 'r':
+
+                break;
+        }
+        sprite.setPosition(camara.position.x,camara.position.y);
+    }
+
 
     /**
      * Mueve la cámara un tile en la dirección establecida
