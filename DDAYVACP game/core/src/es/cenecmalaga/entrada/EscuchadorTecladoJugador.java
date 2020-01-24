@@ -11,34 +11,39 @@ import es.cenecmalaga.personajes.Jugador;
  */
 public class EscuchadorTecladoJugador extends EscuchadorTeclado {
     private Jugador jugador; //El jugador que se va a mover con este escuchador
+    private boolean tipoMovimiento; //Tipo de movimiento del jugador en la pantalla de tiles. True-> Continuo, False -> Discreto.
 
-    public EscuchadorTecladoJugador(Jugador j){
+    public EscuchadorTecladoJugador(Jugador j,boolean tipoMovimiento){
         super(j.getCamara(),j.getMapa());
         jugador=j;
+        this.tipoMovimiento=tipoMovimiento;
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        switch (keycode){
-            case Input.Keys.W:
-                jugador.moverCamaraTile('u');
-                jugador.moverJugadorTile('u',keepCameraInBounds());
-                break;
-            case Input.Keys.S:
-                jugador.moverCamaraTile('d');
-                jugador.moverJugadorTile('d',keepCameraInBounds());
+        if(!tipoMovimiento) {
+            switch (keycode) {
+                case Input.Keys.W:
+                    jugador.moverCamaraTile('u');
+                    jugador.moverJugadorTile('u', keepCameraInBounds());
 
-                 break;
-            case Input.Keys.A:
-                jugador.moverCamaraTile('l');
-                jugador.moverJugadorTile('l',keepCameraInBounds());
+                    break;
+                case Input.Keys.S:
+                    jugador.moverCamaraTile('d');
+                    jugador.moverJugadorTile('d', keepCameraInBounds());
 
-                break;
-            case Input.Keys.D:
-                jugador.moverCamaraTile('r');
-                jugador.moverJugadorTile('r',keepCameraInBounds());
+                    break;
+                case Input.Keys.A:
+                    jugador.moverCamaraTile('l');
+                    jugador.moverJugadorTile('l', keepCameraInBounds());
 
-                break;
+                    break;
+                case Input.Keys.D:
+                    jugador.moverCamaraTile('r');
+                    jugador.moverJugadorTile('r', keepCameraInBounds());
+
+                    break;
+            }
         }
         return false;
     }
@@ -51,19 +56,21 @@ public class EscuchadorTecladoJugador extends EscuchadorTeclado {
     @Override
     public boolean keyTyped(char character) {
         Gdx.app.log("typed",character+"");
-        switch (character){
-            case 'w':
-                jugador.moverJugadorPixels('u');
-                break;
-            case 's':
-                jugador.moverJugadorPixels('d');
-                break;
-            case 'a':
-                jugador.moverJugadorPixels('l');
-                break;
-            case 'd':
-                jugador.moverJugadorPixels('r');
-                break;
+        if(tipoMovimiento) {
+            switch (character) {
+                case 'w':
+                    jugador.moverJugadorPixels('u');
+                    break;
+                case 's':
+                    jugador.moverJugadorPixels('d');
+                    break;
+                case 'a':
+                    jugador.moverJugadorPixels('l');
+                    break;
+                case 'd':
+                    jugador.moverJugadorPixels('r');
+                    break;
+            }
         }
         return false;
     }

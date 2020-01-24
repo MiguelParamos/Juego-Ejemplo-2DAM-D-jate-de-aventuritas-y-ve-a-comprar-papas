@@ -12,7 +12,8 @@ class AndroidLauncher : AndroidApplication() {
         super.onCreate(savedInstanceState)
         val config = AndroidApplicationConfiguration()
         initialize(MiJuego(this.intent.extras!!.
-                getBoolean("genero")), config)
+                getBoolean("genero"),
+                this.intent.extras!!.getBoolean("tipoMovimiento")), config)
     }
 
 }

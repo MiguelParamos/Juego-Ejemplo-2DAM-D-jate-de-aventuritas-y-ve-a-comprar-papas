@@ -123,26 +123,33 @@ public class Jugador {
         }
     }
 
+
     public void moverJugadorPixels(char direccion){
         switch (direccion){
             case 'u':
+                //Uso el deltaTime en movimiento en pixels para
+                //Que la velocidad de movimiento sea independiente de
+                //Los FPS. Es una regla de 3:
+                //Pixels        Segundo
+                //300  ---------    1
+                // x   --------- deltaTime
                 if(posicionPixels.y<this.alturaMapaPixels) {
-                    posicionPixels.y+=5;
+                    posicionPixels.y+=Gdx.graphics.getDeltaTime()*300;
                 }
                 break;
             case 'd':
                 if(posicionPixels.y>0) {
-                    posicionPixels.y-=5;
+                    posicionPixels.y-=Gdx.graphics.getDeltaTime()*300;
                 }
                 break;
             case 'l':
                 if(posicionPixels.x>0) {
-                    posicionPixels.x-=5;
+                    posicionPixels.x-=Gdx.graphics.getDeltaTime()*300;
                 }
                 break;
             case 'r':
                 if(posicionPixels.x<this.anchuraMapaPixels-1) {
-                    posicionPixels.x+=5;
+                    posicionPixels.x+=Gdx.graphics.getDeltaTime()*300;
                 }
                 break;
         }

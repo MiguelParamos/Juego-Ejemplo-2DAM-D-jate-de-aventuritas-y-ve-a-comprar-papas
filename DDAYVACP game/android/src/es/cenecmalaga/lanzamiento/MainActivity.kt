@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         //Si es masculino no va a estar "checked" el switch genero
         //Si es femenino, si va a estarlo.
         bundle.putBoolean("genero",genero.isChecked)
+        bundle.putBoolean("tipoMovimiento",modoMovimiento.isChecked)
         i.putExtras(bundle)
         this.startActivity(i)
     }

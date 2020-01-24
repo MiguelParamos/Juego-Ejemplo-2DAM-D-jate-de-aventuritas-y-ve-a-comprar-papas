@@ -62,7 +62,8 @@ public class PantallaPrincipal extends JPanel {
                 //Si es masculino no va a estar "selected" el toggle tglbtnGenero
                 //Si es femenino, si va a estarlo.
                 new LwjglApplication(new MiJuego(
-                        tglbtnGenero.isSelected()
+                        tglbtnGenero.isSelected(),
+                        tglbtnModoDeMovimiento.isSelected()
                 ), config);
             }
         });

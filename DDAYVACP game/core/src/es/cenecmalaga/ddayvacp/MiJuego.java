@@ -24,15 +24,19 @@ public class MiJuego extends ApplicationAdapter {
 	private static int WIDTH; //Aquí almacenaremos la anchura en tiles
 	private static int HEIGHT; //Aquí almacenaremos la altura en tiles
 	public static final float unitScale = 1/16f; //Nos servirá para establecer que la pantalla se divide en tiles de 16 pixeles;
-	private Jugador jugador;
-	private boolean generoJugador;
+	private Jugador jugador; //El objeto Jugador, para el personaje principal
+	private boolean generoJugador; //Genero del personaje. True -> Femenino, False -> Masculino
+	private boolean tipoMovimiento; //Tipo de movimiento del jugador en la pantalla de tiles. True-> Continuo, False -> Discreto.
 
 	/**
 	 * Constructor de MiJuego, recibe el género del personaje
 	 * @param genero false-> Masculino , true -> Femenino
+	 * @param tipoMovimiento false -> discreto, true -> continuo
 	 */
-	public MiJuego(boolean genero){
+	public MiJuego(boolean genero,boolean tipoMovimiento)
+	{
 		generoJugador=genero;
+		this.tipoMovimiento=tipoMovimiento;
 	}
 
 	/**
@@ -67,7 +71,7 @@ public class MiJuego extends ApplicationAdapter {
 		//ESCUCHADORES
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(new EscuchadorTecladoCamara(camera,map));
-		multiplexer.addProcessor(new EscuchadorTecladoJugador(jugador));
+		multiplexer.addProcessor(new EscuchadorTecladoJugador(jugador,tipoMovimiento));
 		Gdx.input.setInputProcessor(multiplexer);
 
 	}
